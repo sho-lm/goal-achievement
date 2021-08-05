@@ -53,3 +53,4 @@ production:
   database: goal_achievement_production
   username: <%= Rails.application.credentials.mysql[:pro_user] %>
   password: <%= Rails.application.credentials.mysql[:pro_pass] %>
+  host: db # docker-compose.yml のサービス名
