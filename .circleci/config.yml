@@ -20,7 +20,7 @@ jobs:
             # known_hosts に接続先(AWS)のホストを追加する
             - run: ssh-keyscan -p 22 ${HOST_NAME} >> ~/.ssh/known_hosts
             # ssh接続して作業を行う
-            - run: ssh ${USER_NAME}@${HOST_NAME} 'cd webapp/docker/rails/src/goal-achievement && touch test.txt'
+            - run: ssh ${USER_NAME}@${HOST_NAME} 'cd webapp/docker/rails/src/goal-achievement && git pull origin master'
 workflows:
     version: 2.1
     build_and_deploy:
