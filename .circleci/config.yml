@@ -2,7 +2,7 @@ version: 2.1
 jobs:
     build:
         docker:
-            - image: cimg/ruby
+            - image: cimg/node:lts
         steps:
             - checkout
             - run:
@@ -10,7 +10,7 @@ jobs:
                 command: echo "CircleCI Test"
     deploy:
         docker:
-            - image: cimg/ruby
+            - image: cimg/node:lts
         steps:
             - checkout
             # 使用するsshの秘密鍵を指定する
