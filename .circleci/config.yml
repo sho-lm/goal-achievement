@@ -25,12 +25,15 @@ workflows:
     version: 2.1
     build_and_deploy:
         jobs:
-            - build
+            - build:
+                filters:
+                    branches:
+                        only: master-production
             - deploy:
                 requires:
                     - build
                 filters:
                     branches:
-                        only: master
+                        only: master-production
 
 
