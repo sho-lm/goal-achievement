@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     .work-records-header.page-header
-      .page-title 勉強記録
+      .page-title hoge
       .date-selector(v-if="!deleteMode")
         date-picker(
           :date.sync="requestDate"

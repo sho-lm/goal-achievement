@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     .goals-header.page-header
-      .page-title 目標一覧(テスト)
+      .page-title test
       v-select.filter-select(
         v-if="!deleteMode"
         v-model="selected"
