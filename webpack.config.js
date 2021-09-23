@@ -1,9 +1,8 @@
 const path = require('path');
-// const glob = require('glob');
-// const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 // webpack の実行設定
 module.exports = (env, argv) => {
@@ -20,21 +19,22 @@ module.exports = (env, argv) => {
       path: path.resolve(__dirname, 'public/assets')
     },
     plugins: [
+      // バンドルの前に既存ファイルを削除する。
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: [
+          '*.js', '*.css', '*.map', 'manifest.json'  // outputで設定したpathからのglob指定
+        ],
+      }),
       new MiniCssExtractPlugin({
         filename: 'style.css'
       }),
       new VueLoaderPlugin(),
       new ManifestPlugin({
         writeToFileEmit: true
-      })
+      }),
     ],
     module: {
       rules: [
-        // {
-        //   test: /\.js$/,
-        //   exclude: /node_modules/,
-        //   use: 'babel-loader'
-        // },
         {
           test: /\.ts$/,
           use: [
@@ -71,16 +71,6 @@ module.exports = (env, argv) => {
           test: /\.(otf|eot|svg|ttf|woff|woff2)(\?.+)?$/,
           loader: 'url-loader'
         },
-        // {
-        //   test: /\.(jpg|png|gif)$/,
-        //   loader: 'file-loader',
-        //   options: {
-        //     name: '[name].[ext]',
-        //     outputPath: path => {
-        //       return 'images/' + path
-        //     }
-        //   }
-        // }
       ]
     },
     resolve: {
@@ -95,17 +85,5 @@ module.exports = (env, argv) => {
         '@env': path.resolve(__dirname, `frontend/config/.env/${argv.mode}.ts`),
       }
     },
-    // optimization: {
-    //   splitChunks: {
-    //     cacheGroups: {
-    //       vendor: {
-    //         test: /.(c|sa)ss/,
-    //         name: 'style',
-    //         chunks: 'all',
-    //         enforce: true
-    //       }
-    //     }
-    //   }
-    // }
   }
 };
