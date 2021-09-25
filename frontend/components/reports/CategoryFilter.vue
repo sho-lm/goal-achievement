@@ -11,7 +11,7 @@
     )
       template(v-slot:activator="{ on }")
         v-text-field.category-text(
-          value="テスト"
+          value="目標をしぼる"
           v-on="on"
           dense
           hide-details
