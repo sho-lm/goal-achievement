@@ -52,7 +52,7 @@ class Api::V1::ReportsController < ApiController
 
     def filter_checked?(report)
       filter_list = params[:filter_list]
-      return true unless filter_list   # filter_list 指定なしの場合は全部OK
+      return false unless filter_list   # filter_list 指定なしの場合(js側で空配列を渡しても、railsではnilになっている)
 
       id = report.goal_id || "0"
       filter_list.include?(id.to_s)
