@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+    slack: circleci/slack@4.4.4
 jobs:
     build:
         docker:
@@ -21,6 +23,15 @@ jobs:
             - run: ssh-keyscan -p 22 ${HOST_NAME} >> ~/.ssh/known_hosts
             # ssh接続してスクリプトファイルを実行する
             - run: ssh ${USER_NAME}@${HOST_NAME} 'cd webapp/command && sh deploy.sh'
+            # slack連携の設定
+            - slack/notify: # 失敗時の通知
+                channel: C02AHKSE2K1
+                event: fail
+                template: basic_fail_1
+            - slack/notify: # 成功時の通知
+                channel: C02AHKSE2K1
+                event: pass
+                template: basic_success_1
 workflows:
     version: 2.1
     build_and_deploy:
@@ -35,5 +46,7 @@ workflows:
                 filters:
                     branches:
                         only: master-production
+                context: # ContextにSLACKという名前で追加した環境変数の設定を使用する
+                    - SLACK
 
 
