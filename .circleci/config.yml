@@ -8,7 +8,7 @@ jobs:
         steps:
             - checkout
             - run: echo "Hello, World"
-            - run: expr 1 / 0
+            - run: expr 1 / 1
             - slack/notify:
                 channel: C02AHKSE2K1
                 event: fail
