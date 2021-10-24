@@ -13,6 +13,10 @@ jobs:
                 channel: C02AHKSE2K1
                 event: fail
                 template: basic_fail_1
+            - slack/notify:
+                channel: C02AHKSE2K1
+                event: pass
+                template: basic_success_1
 workflows:
     version: 2.1
     build_and_deploy:
