@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+    slack: circleci/slack@4.4.2
 jobs:
     build:
         docker:
@@ -26,14 +28,16 @@ workflows:
     build_and_deploy:
         jobs:
             - build:
-                filters:
-                    branches:
-                        only: master-production
+                # filters:
+                #     branches:
+                #         only: master-production
             - deploy:
                 requires:
                     - build
-                filters:
-                    branches:
-                        only: master-production
+                # filters:
+                #     branches:
+                #         only: master-production
+                context:
+                    - SLACK
 
 
