@@ -8,11 +8,11 @@ jobs:
         steps:
             - checkout
             - run: echo "Hello, World"
+            - run: expr 1 / 0
             - slack/notify:
                 channel: C02AHKSE2K1
                 event: fail
                 template: basic_fail_1
-            - run: expr 1 / 0
 workflows:
     version: 2.1
     build_and_deploy:
