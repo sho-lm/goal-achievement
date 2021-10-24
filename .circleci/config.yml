@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+    slack: circleci/slack@4.4.4
 jobs:
     build:
         docker:
@@ -6,9 +8,15 @@ jobs:
         steps:
             - checkout
             - run: echo "Hello, World"
+            - slack/notify:
+                channel: C02AHKSE2K1
+                event: pass
+                template: basic_fail_1
 workflows:
     version: 2.1
     build_and_deploy:
         jobs:
             - build
+                context:
+                    - SLACK
 
