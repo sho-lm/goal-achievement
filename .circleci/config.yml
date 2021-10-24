@@ -46,7 +46,7 @@ workflows:
                 filters:
                     branches:
                         only: master-production
-                context:
+                context: # ContextにSLACKという名前で追加した環境変数の設定を使用する
                     - SLACK
 
 
